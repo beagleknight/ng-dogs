@@ -1,58 +1,28 @@
 var myApp = angular.module('myApp', []);
 
-myApp.constant('apiKey', 'f31d4e0b5d8d36f4f5c964da17938176'); 
+myApp.controller("DogsController", function ($scope) {
+    $scope.dogs = [];
 
-myApp.factory('Player', function (apiKey) {
-    var dummyPlayer = {
-        name: "David",
-        skill: "5"
+    $scope.addDog = function () {
+        $scope.dogs.push({
+            name: "New dog " +new Date,
+            food: 0
+        });
     };
 
-    console.log("Using api key " + apiKey);
-    return {
-        find: function () {
-            return dummyPlayer;
-        }
-    };
-});
-
-myApp.service('Bet', function (apiKey) {
-    var dummyBet = {
-        coins: "1000"
-    };
-
-    console.log("Using api key " + apiKey);
-
-    this.find = function () {
-        return dummyBet;
+    $scope.removeDog = function (index) {
+        $scope.dogs.splice(index, 1);
     };
 });
 
-myApp.provider('Dog', function () {
-    var breed = 'Beagle';
-
-    this.setBreed = function (_breed) {
-        breed = _breed;
-    };
-
-    this.$get = function () {
-        return {
-            find: function () {
-                return {
-                    name: "Boira",
-                    breed: breed
-                }
-            }
-        }
+myApp.controller("FoodController", function ($scope) {
+    $scope.addFood = function () {
+        $scope.dog.food += 10;
     };
 });
 
-myApp.config(function (DogProvider, apiKey) {
-    DogProvider.setBreed("Golden Retriever");
-});
-
-myApp.run(function ($rootScope, Player, Bet, Dog) {
-    $rootScope.player = Player.find();
-    $rootScope.bet = Bet.find();
-    $rootScope.dog = Dog.find();
+myApp.filter("cute", function () {
+    return function (input) {
+        return "My cute " + input;
+    };
 });

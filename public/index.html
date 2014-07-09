@@ -6,8 +6,17 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body ng-app="myApp">
-    <p>My pro player {{ player.name }}</p>
-    <p>My bet of {{ bet.coins }}</p>
-    <p>My dog's breed is {{ dog.breed }}</p>
+    <div ng-controller="DogsController">
+      <ul>
+        <li ng-repeat="dog in dogs" ng-controller="FoodController">
+          <span>{{ dog.name | cute }}</span>
+          <br />
+          <input type="number" ng-model="dog.food" />
+          <button ng-click="removeDog($index)">Remove</button>
+          <button ng-click="addFood()">Add food</button>
+        </li>
+      </ul>
+      <button ng-click="addDog()">Add Dog</button>
+    </div>
   </body>
 </html>
