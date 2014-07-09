@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
-    <p>Hello World!</p>
+  <body ng-app>
+    <div ng-init="name = 'David'">
+      <p ng-class="{highlight: accept}">Hello {{ name }}</p>
+      <input ng-model="name" />
+      <button ng-click="name = 'David'">Set default</button>
+      <br />
+      <input ng-model="accept" type="checkbox">
+      <label>Accept permissions</label>
+      <p ng-show="accept">Permissions accepted!</p>
+    </div>
+    <ul ng-init="elements = [1,2,3]; counter = 4">
+      <li ng-repeat="elem in elements">
+        <span>{{ elem }}</span>
+      </li>
+      <button ng-click="elements.push(counter); counter = counter + 1">Add elem</button>
+    </ul>
+    <a href="">Not a normal link</a>
   </body>
 </html>
