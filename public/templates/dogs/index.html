@@ -1,0 +1,15 @@
+<h1>Dogs</h1>
+
+We love dogs! (and cats)
+
+<div ng-if="dog">
+  <ul>
+    <li>Name: {{dog.name}}</li>
+  </ul>
+</div>
+
+<ul ng-if="!dog">
+  <li ng-repeat="(id,dog) in dogs">
+    <a ng-href="#/dogs/{{id}}">{{dog.name}}</a>
+  </li>
+</ul>

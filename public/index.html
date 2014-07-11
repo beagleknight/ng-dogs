@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
   </head>
-  <body>
-    <p>Hello World!</p>
+  <body ng-app="myDogs">
+    <ul>
+      <li><a href="#/">Index</a></li>
+      <li><a href="#/dogs">Dogs</a></li>
+    </ul>
+    <ng-view></ng-view>
+    <script src="js/main.js"></script>
   </body>
 </html>
