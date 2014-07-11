@@ -9,7 +9,7 @@ We love dogs! (and cats)
 </div>
 
 <ul ng-if="!dog">
-  <li ng-repeat="(id,dog) in dogs">
-    <a ng-href="#/dogs/{{id}}">{{dog.name}}</a>
+  <li ng-repeat="dog in dogs">
+    <a ng-href="#/dogs/{{dog.id}}">{{dog.name}}</a>
   </li>
 </ul>

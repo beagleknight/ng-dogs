@@ -1,4 +1,4 @@
-var app = angular.module("myDogs", ['ngRoute']);
+var app = angular.module("myDogs", ['ngRoute', 'ngResource']);
 
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -16,17 +16,18 @@ app.config(function ($routeProvider) {
     .otherwise({ redirectTo: '/' })
 });
 
-app.controller("DogsController", function ($scope, $routeParams) {
-    $scope.dogs = {
-        'boira': {
-            name: "Boira"
-        },
-        'dexter': {
-            name: "Dexter"
-        }
-    };
+app.factory("Dog", function ($resource) {
+    return $resource("/dogs/:id", { id: '@id' });
+});
 
+app.controller("DogsController", function ($scope, $routeParams, Dog) {
     if ($routeParams.id) {
-        $scope.dog = $scope.dogs[$routeParams.id];
+        Dog.get({ id: $routeParams.id }, function (dog) {
+            $scope.dog = dog;
+        });
+    } else {
+        Dog.query(function (dogs) {
+            $scope.dogs = dogs;
+        });
     }
 });
