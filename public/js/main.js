@@ -1,6 +1,6 @@
-var app = angular.module("myDogs", ['ngRoute', 'ngResource']);
+var app = angular.module("myDogs", ['ngRoute', 'ngResource', 'pascalprecht.translate']);
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $translateProvider) {
     $routeProvider.when('/', {
         controller: "WelcomeController",
         templateUrl: "templates/welcome/index.html"
@@ -14,6 +14,19 @@ app.config(function ($routeProvider) {
         templateUrl: "templates/dogs/index.html"
     })
     .otherwise({ redirectTo: '/' })
+
+    $translateProvider.translations('en', {
+        dogs: {
+            title: "We love dogs! (and cats)"
+        }
+    });
+    $translateProvider.translations('wow', {
+        dogs: {
+            title: "Wow such copys Wow"
+        }
+    });
+
+    $translateProvider.preferredLanguage('wow');
 });
 
 app.factory("Dog", function ($resource) {
